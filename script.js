@@ -3,22 +3,25 @@ async function fetchGameResults() {
         // Fetch the content of the target page
         const response = await fetch('https://resultados.fpf.pt/Competition/Details?competitionId=19053&seasonId=99');
         
-        // Make sure we got a valid response
+        // Ensure the response is OK
         if (!response.ok) throw new Error('Failed to fetch data');
         
-        // Parse the text content of the page
+        // Get the HTML content of the page
         const htmlText = await response.text();
+        
+        // Log the HTML for debugging purposes (optional)
+        console.log(htmlText);
         
         // Create a temporary DOM parser
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, 'text/html');
         
-        // Extract the part with the specific ID 
-        const gameResult = doc.querySelector('#77444'); // Adjust the selector as needed
+        // Find the div with the ID htmlSerieId_77442
+        const gameResultDiv = doc.querySelector('#htmlSerieId_77442');
         
-        if (gameResult) {
-            // Display the result in our own page
-            document.getElementById('result').innerHTML = gameResult.innerHTML;
+        // Check if the div is found, and insert its content into the page
+        if (gameResultDiv) {
+            document.getElementById('result').innerHTML = gameResultDiv.innerHTML;
         } else {
             document.getElementById('result').innerText = 'Game result not found.';
         }
@@ -28,5 +31,5 @@ async function fetchGameResults() {
     }
 }
 
-// Call the function on page load
+// Run the function when the page loads
 window.onload = fetchGameResults;
