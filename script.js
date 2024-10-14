@@ -1,7 +1,7 @@
 async function fetchGameResults() {
     try {
-        // Fetch the content of the target page
-        const response = await fetch('https://resultados.fpf.pt/Competition/Details?competitionId=19053&seasonId=99');
+        // Fetch the content of the target page using a CORS proxy
+        const response = await fetch('https://cors-anywhere.herokuapp.com/https://resultados.fpf.pt/Competition/Details?competitionId=19053&seasonId=99');
         
         // Ensure the response is OK
         if (!response.ok) throw new Error('Failed to fetch data');
