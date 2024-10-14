@@ -13,8 +13,8 @@ async function fetchGameResults() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, 'text/html');
         
-        // Extract the part with the specific ID (game ID 82435)
-        const gameResult = doc.querySelector('77444'); // Adjust the selector as needed
+        // Extract the part with the specific ID 
+        const gameResult = doc.querySelector('#77444'); // Adjust the selector as needed
         
         if (gameResult) {
             // Display the result in our own page
